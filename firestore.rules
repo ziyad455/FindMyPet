@@ -1,0 +1,71 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Helper function to check if user is the owner
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    // Helper function to check if user is admin
+    function isAdmin() {
+      return isAuthenticated() && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Users collection rules
+    match /users/{userId} {
+      // Users can read their own document
+      allow read: if isAuthenticated() && isOwner(userId);
+      
+      // Users can create their own document on registration
+      allow create: if isAuthenticated() && isOwner(userId);
+      
+      // Only admins can update user roles
+      allow update: if isAdmin();
+      
+      // No one can delete user documents
+      allow delete: if false;
+    }
+    
+    // Pets collection rules
+    match /pets/{petId} {
+      // Anyone can read approved pets (for QR code pages)
+      allow read: if resource.data.status == 'approved';
+      
+      // Authenticated users can read their own pets
+      allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      
+      // Admins can read all pets
+      allow read: if isAdmin();
+      
+      // Authenticated users can create pets (with their own userId)
+      allow create: if isAuthenticated() && 
+        request.resource.data.userId == request.auth.uid &&
+        request.resource.data.status == 'pending';
+      
+      // Users can update their own pending pets (except status)
+      allow update: if isAuthenticated() && 
+        resource.data.userId == request.auth.uid &&
+        resource.data.status == 'pending' &&
+        request.resource.data.status == 'pending' &&
+        request.resource.data.userId == request.auth.uid;
+      
+      // Admins can update any pet (including status changes)
+      allow update: if isAdmin();
+      
+      // Users can delete their own pending pets
+      allow delete: if isAuthenticated() && 
+        resource.data.userId == request.auth.uid &&
+        resource.data.status == 'pending';
+      
+      // Admins can delete any pet
+      allow delete: if isAdmin();
+    }
+  }
+}

@@ -1,0 +1,28 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // Helper function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Pet photos storage rules
+    match /pets/{userId}/{allPaths=**} {
+      // Anyone can read pet photos (for approved pet pages)
+      allow read: if true;
+      
+      // Authenticated users can upload photos to their own folder
+      allow create: if isAuthenticated() && 
+        request.auth.uid == userId &&
+        request.resource.size < 5 * 1024 * 1024 && // Max 5MB
+        request.resource.contentType.matches('image/.*');
+      
+      // Users can update/replace their own photos
+      allow update: if isAuthenticated() && request.auth.uid == userId;
+      
+      // Users can delete their own photos
+      allow delete: if isAuthenticated() && request.auth.uid == userId;
+    }
+  }
+}

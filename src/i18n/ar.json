@@ -1,0 +1,184 @@
+{
+  "common": {
+    "appName": "FindMyPet",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "success": "تم بنجاح",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "approve": "موافقة",
+    "reject": "رفض",
+    "download": "تحميل",
+    "back": "رجوع",
+    "search": "بحث",
+    "noResults": "لا توجد نتائج",
+    "required": "مطلوب",
+    "optional": "اختياري"
+  },
+  "landing": {
+    "title": "ابحث عن حيوانك الأليف المفقود",
+    "subtitle": "منصة لمساعدة أصحاب الحيوانات الأليفة في العثور على حيواناتهم المفقودة",
+    "description": "سجل معلومات حيوانك الأليف واحصل على رمز QR فريد يمكن للآخرين مسحه للتواصل معك إذا وجدوا حيوانك الأليف.",
+    "ctaButton": "أضف حيوانك الأليف الآن",
+    "features": {
+      "title": "لماذا FindMyPet؟",
+      "feature1": {
+        "title": "سهولة الاستخدام",
+        "description": "نموذج بسيط لإدخال معلومات حيوانك الأليف"
+      },
+      "feature2": {
+        "title": "رموز QR فريدة",
+        "description": "احصل على رمز QR يمكن طباعته ووضعه على طوق حيوانك"
+      },
+      "feature3": {
+        "title": "تواصل سريع",
+        "description": "يمكن لمن يجد حيوانك التواصل معك مباشرة"
+      }
+    },
+    "howItWorks": {
+      "title": "كيف يعمل؟",
+      "step1": {
+        "title": "أنشئ حساب",
+        "description": "سجل باستخدام بريدك الإلكتروني"
+      },
+      "step2": {
+        "title": "أضف معلومات حيوانك",
+        "description": "أدخل اسم الحيوان وصورته ومعلومات الاتصال"
+      },
+      "step3": {
+        "title": "احصل على رمز QR",
+        "description": "بعد الموافقة، احصل على رمز QR قابل للتحميل"
+      },
+      "step4": {
+        "title": "اطبع واستخدم",
+        "description": "اطبع الرمز وضعه على طوق حيوانك"
+      }
+    }
+  },
+  "form": {
+    "title": "أضف حيوانك الأليف",
+    "ownerName": "اسم المالك",
+    "ownerNamePlaceholder": "أدخل اسمك الكامل",
+    "petName": "اسم الحيوان الأليف",
+    "petNamePlaceholder": "أدخل اسم حيوانك الأليف",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك",
+    "photo": "صورة الحيوان الأليف",
+    "photoPlaceholder": "اختر صورة",
+    "photoHint": "الحد الأقصى 5 ميجابايت - jpg, png, webp",
+    "message": "رسالة أو وصف",
+    "messagePlaceholder": "أضف أي معلومات إضافية عن حيوانك الأليف",
+    "messageHint": "اختياري - الحد الأقصى 500 حرف",
+    "submitButton": "إرسال الطلب",
+    "submitting": "جاري الإرسال...",
+    "validation": {
+      "ownerNameRequired": "اسم المالك مطلوب",
+      "ownerNameMin": "يجب أن يكون الاسم حرفين على الأقل",
+      "petNameRequired": "اسم الحيوان الأليف مطلوب",
+      "petNameMin": "يجب أن يكون اسم الحيوان حرفين على الأقل",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalid": "رقم الهاتف غير صالح",
+      "photoRequired": "صورة الحيوان مطلوبة",
+      "photoSize": "حجم الصورة يجب أن يكون أقل من 5 ميجابايت",
+      "photoFormat": "صيغة الصورة يجب أن تكون jpg, png, أو webp",
+      "messageMax": "الرسالة يجب أن تكون أقل من 500 حرف"
+    }
+  },
+  "thankYou": {
+    "title": "شكراً لك!",
+    "message": "تم استلام طلبك بنجاح وهو قيد المراجعة.",
+    "nextSteps": {
+      "title": "الخطوات التالية",
+      "step1": "سيقوم فريقنا بمراجعة طلبك",
+      "step2": "بعد الموافقة، ستتمكن من تحميل رمز QR",
+      "step3": "اطبع الرمز وضعه على طوق حيوانك الأليف"
+    },
+    "contact": {
+      "title": "تحتاج مساعدة؟",
+      "email": "تواصل معنا عبر البريد الإلكتروني: support@findmypet.com"
+    },
+    "dashboardButton": "انتقل إلى لوحة التحكم"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "myPets": "حيواناتي الأليفة",
+    "noPets": "لم تقم بإضافة أي حيوانات أليفة بعد",
+    "addPet": "أضف حيوان أليف",
+    "status": {
+      "pending": "قيد المراجعة",
+      "approved": "تمت الموافقة",
+      "rejected": "مرفوض"
+    },
+    "downloadQR": "تحميل رمز QR",
+    "editPet": "تعديل",
+    "viewPet": "عرض"
+  },
+  "admin": {
+    "title": "لوحة تحكم المدير",
+    "allSubmissions": "جميع الطلبات",
+    "pendingSubmissions": "الطلبات المعلقة",
+    "approvedSubmissions": "الطلبات الموافق عليها",
+    "rejectedSubmissions": "الطلبات المرفوضة",
+    "noSubmissions": "لا توجد طلبات",
+    "approveConfirm": "هل أنت متأكد من الموافقة على هذا الطلب؟",
+    "rejectConfirm": "هل أنت متأكد من رفض هذا الطلب؟",
+    "deleteConfirm": "هل أنت متأكد من حذف هذا الطلب؟ لا يمكن التراجع عن هذا الإجراء.",
+    "generateQR": "إنشاء رمز QR",
+    "actions": "الإجراءات"
+  },
+  "petPage": {
+    "title": "معلومات الحيوان الأليف",
+    "ownerInfo": "معلومات المالك",
+    "petInfo": "معلومات الحيوان",
+    "contact": "تواصل مع المالك",
+    "notFound": "لم يتم العثور على الحيوان الأليف",
+    "notFoundMessage": "قد يكون هذا الحيوان الأليف قد تم حذفه أو أن الرابط غير صحيح."
+  },
+  "auth": {
+    "loginTitle": "تسجيل الدخول",
+    "registerTitle": "إنشاء حساب جديد",
+    "email": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أعد إدخال كلمة المرور",
+    "displayName": "الاسم الكامل",
+    "displayNamePlaceholder": "أدخل اسمك الكامل",
+    "loginButton": "تسجيل الدخول",
+    "registerButton": "إنشاء حساب",
+    "googleSignIn": "تسجيل الدخول عبر Google",
+    "orContinueWith": "أو تابع باستخدام",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب؟",
+    "errors": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "البريد الإلكتروني غير صالح",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordMin": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+      "passwordMatch": "كلمتا المرور غير متطابقتين",
+      "displayNameRequired": "الاسم مطلوب",
+      "loginFailed": "فشل تسجيل الدخول. تحقق من بياناتك.",
+      "registerFailed": "فشل إنشاء الحساب. حاول مرة أخرى.",
+      "googleFailed": "فشل تسجيل الدخول عبر Google. حاول مرة أخرى."
+    }
+  },
+  "header": {
+    "home": "الرئيسية",
+    "dashboard": "لوحة التحكم",
+    "addPet": "أضف حيوان",
+    "admin": "المدير"
+  },
+  "footer": {
+    "copyright": "© 2024 FindMyPet. جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الاستخدام",
+    "contact": "تواصل معنا"
+  }
+}

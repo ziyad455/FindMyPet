@@ -1,0 +1,184 @@
+{
+  "common": {
+    "appName": "FindMyPet",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "logout": "Déconnexion",
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "success": "Succès",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "approve": "Approuver",
+    "reject": "Rejeter",
+    "download": "Télécharger",
+    "back": "Retour",
+    "search": "Rechercher",
+    "noResults": "Aucun résultat",
+    "required": "Obligatoire",
+    "optional": "Optionnel"
+  },
+  "landing": {
+    "title": "Retrouvez votre animal perdu",
+    "subtitle": "Une plateforme pour aider les propriétaires d'animaux à retrouver leurs compagnons perdus",
+    "description": "Enregistrez les informations de votre animal et obtenez un code QR unique que les autres peuvent scanner pour vous contacter s'ils trouvent votre animal.",
+    "ctaButton": "Ajoutez votre animal maintenant",
+    "features": {
+      "title": "Pourquoi FindMyPet ?",
+      "feature1": {
+        "title": "Facile à utiliser",
+        "description": "Un formulaire simple pour entrer les informations de votre animal"
+      },
+      "feature2": {
+        "title": "Codes QR uniques",
+        "description": "Obtenez un code QR imprimable pour le collier de votre animal"
+      },
+      "feature3": {
+        "title": "Contact rapide",
+        "description": "Celui qui trouve votre animal peut vous contacter directement"
+      }
+    },
+    "howItWorks": {
+      "title": "Comment ça marche ?",
+      "step1": {
+        "title": "Créez un compte",
+        "description": "Inscrivez-vous avec votre email"
+      },
+      "step2": {
+        "title": "Ajoutez votre animal",
+        "description": "Entrez le nom, la photo et vos coordonnées"
+      },
+      "step3": {
+        "title": "Obtenez le code QR",
+        "description": "Après approbation, téléchargez votre code QR"
+      },
+      "step4": {
+        "title": "Imprimez et utilisez",
+        "description": "Imprimez le code et attachez-le au collier"
+      }
+    }
+  },
+  "form": {
+    "title": "Ajoutez votre animal",
+    "ownerName": "Nom du propriétaire",
+    "ownerNamePlaceholder": "Entrez votre nom complet",
+    "petName": "Nom de l'animal",
+    "petNamePlaceholder": "Entrez le nom de votre animal",
+    "phone": "Numéro de téléphone",
+    "phonePlaceholder": "Entrez votre numéro de téléphone",
+    "photo": "Photo de l'animal",
+    "photoPlaceholder": "Choisir une photo",
+    "photoHint": "Maximum 5 Mo - jpg, png, webp",
+    "message": "Message ou description",
+    "messagePlaceholder": "Ajoutez des informations supplémentaires sur votre animal",
+    "messageHint": "Optionnel - Maximum 500 caractères",
+    "submitButton": "Soumettre la demande",
+    "submitting": "Envoi en cours...",
+    "validation": {
+      "ownerNameRequired": "Le nom du propriétaire est requis",
+      "ownerNameMin": "Le nom doit contenir au moins 2 caractères",
+      "petNameRequired": "Le nom de l'animal est requis",
+      "petNameMin": "Le nom de l'animal doit contenir au moins 2 caractères",
+      "phoneRequired": "Le numéro de téléphone est requis",
+      "phoneInvalid": "Numéro de téléphone invalide",
+      "photoRequired": "La photo de l'animal est requise",
+      "photoSize": "La taille de la photo doit être inférieure à 5 Mo",
+      "photoFormat": "Le format de la photo doit être jpg, png ou webp",
+      "messageMax": "Le message doit contenir moins de 500 caractères"
+    }
+  },
+  "thankYou": {
+    "title": "Merci !",
+    "message": "Votre demande a été reçue et est en cours de révision.",
+    "nextSteps": {
+      "title": "Prochaines étapes",
+      "step1": "Notre équipe examinera votre demande",
+      "step2": "Après approbation, vous pourrez télécharger le code QR",
+      "step3": "Imprimez le code et attachez-le au collier de votre animal"
+    },
+    "contact": {
+      "title": "Besoin d'aide ?",
+      "email": "Contactez-nous par email : support@findmypet.com"
+    },
+    "dashboardButton": "Aller au tableau de bord"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "myPets": "Mes animaux",
+    "noPets": "Vous n'avez pas encore ajouté d'animaux",
+    "addPet": "Ajouter un animal",
+    "status": {
+      "pending": "En attente",
+      "approved": "Approuvé",
+      "rejected": "Rejeté"
+    },
+    "downloadQR": "Télécharger le QR",
+    "editPet": "Modifier",
+    "viewPet": "Voir"
+  },
+  "admin": {
+    "title": "Panneau d'administration",
+    "allSubmissions": "Toutes les soumissions",
+    "pendingSubmissions": "En attente",
+    "approvedSubmissions": "Approuvées",
+    "rejectedSubmissions": "Rejetées",
+    "noSubmissions": "Aucune soumission",
+    "approveConfirm": "Êtes-vous sûr de vouloir approuver cette soumission ?",
+    "rejectConfirm": "Êtes-vous sûr de vouloir rejeter cette soumission ?",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette soumission ? Cette action est irréversible.",
+    "generateQR": "Générer le QR",
+    "actions": "Actions"
+  },
+  "petPage": {
+    "title": "Informations sur l'animal",
+    "ownerInfo": "Informations du propriétaire",
+    "petInfo": "Informations de l'animal",
+    "contact": "Contacter le propriétaire",
+    "notFound": "Animal non trouvé",
+    "notFoundMessage": "Cet animal a peut-être été supprimé ou le lien est incorrect."
+  },
+  "auth": {
+    "loginTitle": "Connexion",
+    "registerTitle": "Créer un compte",
+    "email": "Email",
+    "emailPlaceholder": "Entrez votre email",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+    "displayName": "Nom complet",
+    "displayNamePlaceholder": "Entrez votre nom complet",
+    "loginButton": "Se connecter",
+    "registerButton": "S'inscrire",
+    "googleSignIn": "Continuer avec Google",
+    "orContinueWith": "Ou continuer avec",
+    "noAccount": "Pas de compte ?",
+    "hasAccount": "Déjà un compte ?",
+    "errors": {
+      "emailRequired": "L'email est requis",
+      "emailInvalid": "Email invalide",
+      "passwordRequired": "Le mot de passe est requis",
+      "passwordMin": "Le mot de passe doit contenir au moins 6 caractères",
+      "passwordMatch": "Les mots de passe ne correspondent pas",
+      "displayNameRequired": "Le nom est requis",
+      "loginFailed": "Échec de la connexion. Vérifiez vos informations.",
+      "registerFailed": "Échec de l'inscription. Veuillez réessayer.",
+      "googleFailed": "Échec de la connexion Google. Veuillez réessayer."
+    }
+  },
+  "header": {
+    "home": "Accueil",
+    "dashboard": "Tableau de bord",
+    "addPet": "Ajouter un animal",
+    "admin": "Admin"
+  },
+  "footer": {
+    "copyright": "© 2024 FindMyPet. Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "contact": "Contactez-nous"
+  }
+}
