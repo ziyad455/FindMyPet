@@ -3,7 +3,7 @@
 
 import { useState, useCallback } from 'react';
 import type { PetFormData, FormErrors } from '../types';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from './useLanguage';
 import { validateImageFile } from '../services/storageService';
 
 // Phone regex pattern (international format) - defined outside component

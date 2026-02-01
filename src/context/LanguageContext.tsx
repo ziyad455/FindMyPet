@@ -1,9 +1,10 @@
 // Language Context Provider
 // Manages internationalization (i18n) with Arabic and French support
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Cookies from 'js-cookie';
-import type { Language, LanguageContextType } from '../types';
+import type { Language, LanguageContextType, TranslationParams } from '../types';
+import { LanguageContext } from './languageContextDef';
 
 // Import translations
 import arTranslations from '../i18n/ar.json';
@@ -21,22 +22,8 @@ const translations: Record<Language, Translations> = {
 // Cookie key for language preference
 const LANGUAGE_COOKIE_KEY = 'findmypet_language';
 
-// Create context with default values
-const LanguageContext = createContext<LanguageContextType>({
-  language: 'fr',
-  setLanguage: () => {},
-  isRTL: false,
-  t: () => ''
-});
-
-// Custom hook to use language context
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
+// Re-export the context for external use
+export { LanguageContext };
 
 interface LanguageProviderProps {
   children: React.ReactNode;
@@ -61,6 +48,17 @@ const getNestedValue = (obj: Record<string, unknown>, path: string): string => {
   }
   
   return typeof current === 'string' ? current : path;
+};
+
+/**
+ * Interpolate translation string with parameters
+ * Replaces {{key}} with corresponding value
+ */
+const interpolate = (str: string, params?: TranslationParams): string => {
+  if (!params) return str;
+  return str.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+    return params[key]?.toString() ?? `{{${key}}}`;
+  });
 };
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
@@ -92,10 +90,11 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
     Cookies.set(LANGUAGE_COOKIE_KEY, lang, { expires: 365 }); // Save for 1 year
   }, []);
 
-  // Translation function
-  const t = useCallback((key: string): string => {
+  // Translation function with interpolation support
+  const t = useCallback((key: string, params?: TranslationParams): string => {
     const currentTranslations = translations[language];
-    return getNestedValue(currentTranslations as unknown as Record<string, unknown>, key);
+    const value = getNestedValue(currentTranslations as unknown as Record<string, unknown>, key);
+    return interpolate(value, params);
   }, [language]);
 
   const value: LanguageContextType = {

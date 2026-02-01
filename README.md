@@ -1,158 +1,73 @@
-# FindMyPet 🐾
+# React + TypeScript + Vite
 
-A web application that enables pet owners to submit their pet information and allows administrators to manage submissions and generate QR codes. Built with React, TypeScript, Firebase, and Tailwind CSS.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-✅ **User Authentication** - Email/Password with Firebase Auth  
-✅ **Pet Submission Form** - With image upload and validation  
-✅ **User Dashboard** - View and edit own submissions  
-✅ **Admin Dashboard** - Manage all submissions, approve/reject  
-✅ **QR Code Generation** - Client-side generation, downloadable PNG  
-✅ **Public Pet Pages** - Accessible via QR code link  
-✅ **Bilingual Support** - Arabic & French with RTL support  
-✅ **Firebase Sync** - Real-time updates, deletes, and edits synchronized  
-✅ **Responsive Design** - Works on mobile, tablet, and desktop
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Tech Stack
+## React Compiler
 
-- **Frontend**: React 19 + TypeScript + Vite
-- **Styling**: Tailwind CSS
-- **Backend**: Firebase (Auth, Firestore, Storage)
-- **QR Code**: qrcode.react
-- **Internationalization**: Custom i18n with JSON files
-- **Routing**: React Router v6
+The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-## Project Structure
+## Expanding the ESLint configuration
 
-```
-/src
-  /components      → Reusable UI components
-  /pages           → LandingPage, FormPage, UserDashboard, AdminDashboard, PetPage
-  /hooks           → Custom hooks (useFirestore, useFormValidation)
-  /services        → Firebase services (Auth, Firestore, Storage)
-  /types           → TypeScript types/interfaces
-  /context         → AuthContext, LanguageContext
-  /i18n            → ar.json, fr.json
-  firebase.ts      → Firebase initialization
-```
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Getting Started
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-### Prerequisites
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-- Node.js 18+
-- npm or yarn
-- Firebase project
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/findmypet.git
-   cd findmypet
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure Firebase**
-   
-   Create a `.env` file in the root directory:
-   ```env
-   VITE_FIREBASE_API_KEY=your_api_key
-   VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-   VITE_FIREBASE_PROJECT_ID=your_project_id
-   VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-   VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-   VITE_FIREBASE_APP_ID=your_app_id
-   ```
-
-4. **Set up Firebase**
-   - Create a Firebase project at [console.firebase.google.com](https://console.firebase.google.com)
-   - Enable Email/Password authentication
-   - Create a Firestore database
-   - Enable Storage
-   - Deploy security rules:
-     ```bash
-     firebase deploy --only firestore:rules,storage
-     ```
-
-5. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-6. **Open the app**
-   
-   Visit [http://localhost:5173](http://localhost:5173)
-
-## Firebase Setup
-
-### Firestore Collections
-
-**users**
-```typescript
-{
-  email: string,
-  displayName: string,
-  role: "user" | "admin",
-  createdAt: timestamp
-}
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-**pets**
-```typescript
-{
-  userId: string,
-  ownerName: string,
-  petName: string,
-  phone: string,
-  photoUrl: string,
-  message: string,
-  status: "pending" | "approved" | "rejected",
-  qrCodeUrl?: string,
-  createdAt: timestamp,
-  updatedAt: timestamp
-}
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-### Creating an Admin User
-
-1. Register a new user through the app
-2. In Firebase Console, go to Firestore
-3. Find the user document in the `users` collection
-4. Change `role` from `"user"` to `"admin"`
-
-### Security Rules
-
-Security rules are provided in:
-- `firestore.rules` - Firestore database rules
-- `storage.rules` - Storage bucket rules
-
-Deploy them using:
-```bash
-firebase deploy --only firestore:rules,storage
-```
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-
-## Internationalization
-
-The app supports Arabic and French. Language files are located in `/src/i18n/`:
-
-- `ar.json` - Arabic translations (RTL)
-- `fr.json` - French translations (LTR)
-
-To add more languages, create a new JSON file and update `LanguageContext.tsx`.
-
-## License
-
-This project is licensed under the MIT License.

@@ -99,7 +99,6 @@
 - **Firebase Actions:**
   - All changes (approve, reject, delete) sync immediately to Firebase
   - Status updates reflected in real-time
-  admin can also see the approved pets in the admin dashboard to redowlond the qr code  or delete the entire user submission
 
 ### 5. QR Page (`/pet/{id}`)
 - **Public Access**: Anyone with the link can view
@@ -107,7 +106,7 @@
   - Pet information
   - Owner information
   - Pet photo
-- **Security**: Deleted or rejected submissions return 404
+- **Security**: Deleted or rejected submissions return 404 or access denied
 
 ---
 
@@ -229,7 +228,7 @@ All form inputs must be validated:
 
 **Implementation:**
 - Generate QR codes client-side using a library (e.g., `qrcode.react` or `qrcode`)
-- QR code links to: `https://findmypet.com/pet/{petId}` or localhost if we are not on prodaction yet
+- QR code links to: `https://yourdomain.com/pet/{petId}`
 - Download as PNG with pet name in filename
 - Store QR code URL in Firestore (optional)
 
@@ -246,7 +245,12 @@ const qrData = `https://findmypet.com/pet/${petId}`;
 
 ### Setup Steps
 
-
+1. **Initialize Project:**
+   ```bash
+   npm create vite@latest findmypet -- --template react-ts
+   cd findmypet
+   npm install
+   ```
 
 2. **Install Dependencies:**
    ```bash

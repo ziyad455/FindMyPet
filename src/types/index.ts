@@ -62,11 +62,14 @@ export interface AuthContextType {
 // Language context type
 export type Language = "ar" | "fr";
 
+// Translation parameters for interpolation
+export type TranslationParams = Record<string, string | number>;
+
 export interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   isRTL: boolean;
-  t: (key: string) => string;
+  t: (key: string, params?: TranslationParams) => string;
 }
 
 // Firebase Firestore pet document (for conversion)

@@ -5,15 +5,15 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// Firebase configuration
+// Firebase configuration from environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyAqjdRanYWwTZYxNkw1KTncWuYCrvsguM8",
-  authDomain: "findmypet-e47cf.firebaseapp.com",
-  projectId: "findmypet-e47cf",
-  storageBucket: "findmypet-e47cf.firebasestorage.app",
-  messagingSenderId: "963136921263",
-  appId: "1:963136921263:web:ae18a761cb50a90143be5a",
-  measurementId: "G-3M1YLENFCD"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 

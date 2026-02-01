@@ -10,7 +10,9 @@
     "submit": "Soumettre",
     "cancel": "Annuler",
     "save": "Enregistrer",
+    "saved": "Enregistré avec succès",
     "delete": "Supprimer",
+    "deleted": "Supprimé avec succès",
     "edit": "Modifier",
     "approve": "Approuver",
     "reject": "Rejeter",
@@ -24,7 +26,7 @@
   "landing": {
     "title": "Retrouvez votre animal perdu",
     "subtitle": "Une plateforme pour aider les propriétaires d'animaux à retrouver leurs compagnons perdus",
-    "description": "Enregistrez les informations de votre animal et obtenez un code QR unique que les autres peuvent scanner pour vous contacter s'ils trouvent votre animal.",
+    "description": "Enregistrez votre animal et recevez un collier avec code QR unique. Si quelqu'un trouve votre animal, il peut scanner le code et vous contacter instantanément via WhatsApp.",
     "ctaButton": "Ajoutez votre animal maintenant",
     "features": {
       "title": "Pourquoi FindMyPet ?",
@@ -33,12 +35,12 @@
         "description": "Un formulaire simple pour entrer les informations de votre animal"
       },
       "feature2": {
-        "title": "Codes QR uniques",
-        "description": "Obtenez un code QR imprimable pour le collier de votre animal"
+        "title": "Collier avec QR Code",
+        "description": "Recevez un collier élégant avec un code QR unique intégré"
       },
       "feature3": {
         "title": "Contact rapide",
-        "description": "Celui qui trouve votre animal peut vous contacter directement"
+        "description": "Celui qui trouve votre animal peut vous contacter directement via WhatsApp"
       }
     },
     "howItWorks": {
@@ -52,12 +54,12 @@
         "description": "Entrez le nom, la photo et vos coordonnées"
       },
       "step3": {
-        "title": "Obtenez le code QR",
-        "description": "Après approbation, téléchargez votre code QR"
+        "title": "Commandez votre collier",
+        "description": "Après approbation, recevez votre collier avec code QR"
       },
       "step4": {
-        "title": "Imprimez et utilisez",
-        "description": "Imprimez le code et attachez-le au collier"
+        "title": "Protégez votre animal",
+        "description": "Mettez le collier et soyez contacté si votre animal est trouvé"
       }
     }
   },
@@ -96,8 +98,8 @@
     "nextSteps": {
       "title": "Prochaines étapes",
       "step1": "Notre équipe examinera votre demande",
-      "step2": "Après approbation, vous pourrez télécharger le code QR",
-      "step3": "Imprimez le code et attachez-le au collier de votre animal"
+      "step2": "Après approbation, nous vous contacterons pour la livraison",
+      "step3": "Recevez votre collier avec code QR et protégez votre animal"
     },
     "contact": {
       "title": "Besoin d'aide ?",
@@ -112,10 +114,10 @@
     "addPet": "Ajouter un animal",
     "status": {
       "pending": "En attente",
-      "approved": "Approuvé",
+      "approved": "Approuvé - Collier en préparation",
       "rejected": "Rejeté"
     },
-    "downloadQR": "Télécharger le QR",
+    "downloadQR": "Voir QR",
     "editPet": "Modifier",
     "viewPet": "Voir"
   },
@@ -126,8 +128,13 @@
     "approvedSubmissions": "Approuvées",
     "rejectedSubmissions": "Rejetées",
     "noSubmissions": "Aucune soumission",
+    "approveTitle": "Approuver cette soumission",
     "approveConfirm": "Êtes-vous sûr de vouloir approuver cette soumission ?",
+    "approved": "Soumission approuvée avec succès",
+    "rejectTitle": "Rejeter cette soumission",
     "rejectConfirm": "Êtes-vous sûr de vouloir rejeter cette soumission ?",
+    "rejected": "Soumission rejetée",
+    "deleteTitle": "Supprimer cette soumission",
     "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette soumission ? Cette action est irréversible.",
     "generateQR": "Générer le QR",
     "actions": "Actions"
@@ -136,9 +143,10 @@
     "title": "Informations sur l'animal",
     "ownerInfo": "Informations du propriétaire",
     "petInfo": "Informations de l'animal",
-    "contact": "Contacter le propriétaire",
+    "contact": "Contacter via WhatsApp",
     "notFound": "Animal non trouvé",
-    "notFoundMessage": "Cet animal a peut-être été supprimé ou le lien est incorrect."
+    "notFoundMessage": "Cet animal a peut-être été supprimé ou le lien est incorrect.",
+    "whatsappMessage": "Bonjour ! J'ai trouvé votre animal {{petName}}. Je vous contacte via FindMyPet."
   },
   "auth": {
     "loginTitle": "Connexion",
@@ -167,7 +175,10 @@
       "loginFailed": "Échec de la connexion. Vérifiez vos informations.",
       "registerFailed": "Échec de l'inscription. Veuillez réessayer.",
       "googleFailed": "Échec de la connexion Google. Veuillez réessayer."
-    }
+    },
+    "passwordWeak": "Mot de passe faible",
+    "passwordMedium": "Mot de passe moyen",
+    "passwordStrong": "Mot de passe fort"
   },
   "header": {
     "home": "Accueil",

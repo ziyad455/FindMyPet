@@ -1,101 +1,163 @@
 // Landing Page component
-// Introduces the service and provides CTA to submit pet
+// Modern design with GSAP animations
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
 import { useLanguage, useAuth } from '../context';
 
 export const LandingPage: React.FC = () => {
   const { t, isRTL } = useLanguage();
   const { user } = useAuth();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Hero animations
+    const heroTl = gsap.timeline();
+    heroTl.fromTo(
+      '.hero-title',
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+    );
+    heroTl.fromTo(
+      '.hero-subtitle',
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+      '-=0.4'
+    );
+    heroTl.fromTo(
+      '.hero-description',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+      '-=0.3'
+    );
+    heroTl.fromTo(
+      '.hero-cta',
+      { opacity: 0, scale: 0.9 },
+      { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)' },
+      '-=0.2'
+    );
+
+    // Floating animation for decorative elements
+    gsap.to('.float-element', {
+      y: -15,
+      duration: 2,
+      ease: 'power1.inOut',
+      yoyo: true,
+      repeat: -1,
+      stagger: 0.3
+    });
+  }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-500 to-primary-700 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+      <section
+        ref={heroRef}
+        className="relative bg-gradient-to-br from-primary-600 via-primary-500 to-primary-700 text-white py-24 lg:py-32 overflow-hidden"
+      >
+        {/* Background decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="float-element absolute top-20 left-[10%] w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+          <div className="float-element absolute bottom-20 right-[10%] w-96 h-96 bg-primary-400/20 rounded-full blur-3xl" />
+          <div className="float-element absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Badge */}
+            <div className="hero-subtitle inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8 border border-white/20">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+              {t('landing.subtitle')}
+            </div>
+
+            <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               {t('landing.title')}
             </h1>
-            <p className="text-xl md:text-2xl text-primary-100 mb-8 max-w-3xl mx-auto">
-              {t('landing.subtitle')}
-            </p>
-            <p className="text-lg text-primary-200 mb-10 max-w-2xl mx-auto">
+
+            <p className="hero-description text-lg md:text-xl text-primary-100 mb-10 max-w-2xl mx-auto leading-relaxed">
               {t('landing.description')}
             </p>
+
             <Link
               to={user ? '/submit' : '/register'}
-              className="inline-flex items-center px-8 py-4 bg-white text-primary-600 font-semibold rounded-lg shadow-lg hover:bg-primary-50 transition-colors text-lg"
+              className="hero-cta inline-flex items-center gap-3 px-8 py-4 bg-white text-primary-600 font-semibold rounded-2xl shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-black/30 hover:-translate-y-1 transition-all duration-300 text-lg group"
             >
               {t('landing.ctaButton')}
               <svg
-                className={`w-5 h-5 ${isRTL ? 'mr-2 rotate-180' : 'ml-2'}`}
+                className={`w-5 h-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </Link>
           </div>
         </div>
+
+        {/* Wave divider */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg className="w-full h-16 md:h-24" viewBox="0 0 1440 96" fill="none" preserveAspectRatio="none">
+            <path d="M0 96L60 85.3C120 75 240 53 360 48C480 43 600 53 720 58.7C840 64 960 64 1080 58.7C1200 53 1320 43 1380 37.3L1440 32V96H1380C1320 96 1200 96 1080 96C960 96 840 96 720 96C600 96 480 96 360 96C240 96 120 96 60 96H0Z" fill="white"/>
+          </svg>
+        </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section ref={featuresRef} className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            {t('landing.features.title')}
-          </h2>
-          
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {t('landing.features.title')}
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full mx-auto" />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="group p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 border border-transparent hover:border-gray-100">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary-500/25">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
                 {t('landing.features.feature1.title')}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 leading-relaxed">
                 {t('landing.features.feature1.description')}
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="group p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 border border-transparent hover:border-gray-100">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary-500/25">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
                 {t('landing.features.feature2.title')}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 leading-relaxed">
                 {t('landing.features.feature2.description')}
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="text-center p-6 rounded-lg hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="group p-8 rounded-3xl bg-gray-50 hover:bg-white hover:shadow-xl hover:shadow-gray-200/50 transition-all duration-300 border border-transparent hover:border-gray-100">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary-500/25">
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
                 {t('landing.features.feature3.title')}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 leading-relaxed">
                 {t('landing.features.feature3.description')}
               </p>
             </div>
@@ -104,81 +166,50 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 bg-gray-50">
+      <section ref={stepsRef} className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            {t('landing.howItWorks.title')}
-          </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {t('landing.howItWorks.title')}
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full mx-auto" />
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Step 1 */}
-            <div className="relative">
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
-                  1
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 text-center">
-                  {t('landing.howItWorks.step1.title')}
-                </h3>
-                <p className="text-gray-600 text-center">
-                  {t('landing.howItWorks.step1.description')}
-                </p>
-              </div>
-            </div>
+            {[1, 2, 3, 4].map((step) => (
+              <div key={step} className="relative group">
+                <div className="relative bg-white rounded-3xl p-8 shadow-lg shadow-gray-100/50 hover:shadow-xl hover:shadow-primary-100/50 transition-all duration-300 hover:-translate-y-1">
+                  {/* Step number */}
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-5 mx-auto shadow-lg shadow-primary-500/25 group-hover:scale-110 transition-transform duration-300">
+                    {step}
+                  </div>
 
-            {/* Step 2 */}
-            <div className="relative">
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
-                  2
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
+                    {t(`landing.howItWorks.step${step}.title`)}
+                  </h3>
+                  <p className="text-gray-600 text-center text-sm leading-relaxed">
+                    {t(`landing.howItWorks.step${step}.description`)}
+                  </p>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 text-center">
-                  {t('landing.howItWorks.step2.title')}
-                </h3>
-                <p className="text-gray-600 text-center">
-                  {t('landing.howItWorks.step2.description')}
-                </p>
               </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="relative">
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
-                  3
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 text-center">
-                  {t('landing.howItWorks.step3.title')}
-                </h3>
-                <p className="text-gray-600 text-center">
-                  {t('landing.howItWorks.step3.description')}
-                </p>
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="relative">
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
-                  4
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 text-center">
-                  {t('landing.howItWorks.step4.title')}
-                </h3>
-                <p className="text-gray-600 text-center">
-                  {t('landing.howItWorks.step4.description')}
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link
               to={user ? '/submit' : '/register'}
-              className="inline-flex items-center px-8 py-4 bg-primary-600 text-white font-semibold rounded-lg shadow-lg hover:bg-primary-700 transition-colors text-lg"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-2xl shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-1 transition-all duration-300 text-lg group"
             >
               {t('landing.ctaButton')}
+              <svg
+                className={`w-5 h-5 group-hover:translate-x-1 transition-transform ${isRTL ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
             </Link>
           </div>
         </div>
