@@ -7,7 +7,8 @@ import { useLanguage } from './useLanguage';
 import { validateImageFile } from '../services/storageService';
 
 // Phone regex pattern (international format) - defined outside component
-const PHONE_REGEX = /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/;
+// Moroccan phone regex pattern (+212 followed by 9 digits)
+const MOROCCAN_PHONE_REGEX = /^\+212\d{9}$/;
 
 export const useFormValidation = () => {
   const { t } = useLanguage();
@@ -38,11 +39,14 @@ export const useFormValidation = () => {
         break;
 
       case 'phone':
-        if (!value || (typeof value === 'string' && !value.trim())) {
+        if (!value || (typeof value === 'string' && value.replace(/[-\s]/g, '') === '+212')) {
           return t('form.validation.phoneRequired');
         }
-        if (typeof value === 'string' && !PHONE_REGEX.test(value)) {
-          return t('form.validation.phoneInvalid');
+        if (typeof value === 'string') {
+          const cleanValue = value.replace(/[-\s]/g, '');
+          if (!MOROCCAN_PHONE_REGEX.test(cleanValue)) {
+            return t('form.validation.phoneInvalid');
+          }
         }
         break;
 

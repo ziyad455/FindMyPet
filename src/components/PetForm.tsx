@@ -6,6 +6,7 @@ import type { PetFormData, FormErrors, Pet } from '../types';
 import { useLanguage } from '../context';
 import { useFormValidation } from '../hooks';
 import LoadingSpinner from './LoadingSpinner';
+import { formatMoroccanPhone, cleanPhoneForStorage } from '../utils/phoneFormatter';
 
 interface PetFormProps {
   initialData?: Pet;
@@ -25,7 +26,7 @@ export const PetForm: React.FC<PetFormProps> = ({
   const [formData, setFormData] = useState<PetFormData>({
     ownerName: initialData?.ownerName || '',
     petName: initialData?.petName || '',
-    phone: initialData?.phone || '',
+    phone: initialData?.phone ? formatMoroccanPhone(initialData.phone) : '+212',
     photo: null,
     message: initialData?.message || ''
   });
@@ -42,6 +43,26 @@ export const PetForm: React.FC<PetFormProps> = ({
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     clearFieldError(name as keyof FormErrors);
+  };
+
+  // Specialized handler for Moroccan phone number (+212)
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    // Ensure it always starts with +212
+    if (!value.startsWith('+212')) {
+      value = '+212';
+    }
+
+    // Extract digits and apply formatting
+    const prefix = '+212';
+    const cleanValue = value.replace(/[-\s]/g, '');
+    const digits = cleanValue.slice(prefix.length).replace(/\D/g, '').slice(0, 9);
+
+    const formattedValue = formatMoroccanPhone(prefix + digits);
+
+    setFormData(prev => ({ ...prev, phone: formattedValue }));
+    clearFieldError('phone');
   };
 
   // Handle file input change
@@ -99,7 +120,13 @@ export const PetForm: React.FC<PetFormProps> = ({
       return;
     }
 
-    await onSubmit(formData);
+    // Clean phone number for storage
+    const submissionData = {
+      ...formData,
+      phone: cleanPhoneForStorage(formData.phone)
+    };
+
+    await onSubmit(submissionData);
   };
 
   const inputBaseClass = "w-full px-4 py-3 border-2 rounded-xl bg-gray-50 focus:bg-white focus:ring-4 focus:ring-primary-100 focus:border-primary-500 transition-all duration-200 text-gray-900 placeholder-gray-400";
@@ -185,8 +212,8 @@ export const PetForm: React.FC<PetFormProps> = ({
             id="phone"
             name="phone"
             value={formData.phone}
-            onChange={handleChange}
-            placeholder={t('form.phonePlaceholder')}
+            onChange={handlePhoneChange}
+            placeholder="+212XXXXXXXXX"
             className={`${inputBaseClass} pl-12 ${errors.phone ? 'border-red-400 focus:border-red-500 focus:ring-red-100' : 'border-gray-200'}`}
             dir="ltr"
           />
@@ -212,13 +239,12 @@ export const PetForm: React.FC<PetFormProps> = ({
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
-          className={`relative border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 ${
-            isDragging
-              ? 'border-primary-500 bg-primary-50'
-              : errors.photo
+          className={`relative border-2 border-dashed rounded-2xl p-6 text-center cursor-pointer transition-all duration-200 ${isDragging
+            ? 'border-primary-500 bg-primary-50'
+            : errors.photo
               ? 'border-red-300 bg-red-50'
               : 'border-gray-200 bg-gray-50 hover:border-primary-300 hover:bg-gray-100'
-          }`}
+            }`}
         >
           <input
             type="file"
