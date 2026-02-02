@@ -136,7 +136,7 @@ export const PetPage: React.FC = () => {
             {/* Contact CTA */}
             <div className="border-t pt-6 mt-6">
               <a
-                href={`https://wa.me/${pet.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(t('petPage.whatsappMessage', { petName: pet.petName }))}`}
+                href={`https://api.whatsapp.com/send?phone=${pet.phone.replace(/[^0-9]/g, '')}&text=${encodeURIComponent(t('petPage.whatsappMessage', { petName: pet.petName }))}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-2 py-4 px-6 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors text-lg"
