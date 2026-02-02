@@ -60,7 +60,7 @@ export interface AuthContextType {
 }
 
 // Language context type
-export type Language = "ar" | "fr";
+export type Language = "ar" | "fr" | "en";
 
 // Translation parameters for interpolation
 export type TranslationParams = Record<string, string | number>;

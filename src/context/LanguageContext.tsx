@@ -9,6 +9,7 @@ import { LanguageContext } from './languageContextDef';
 // Import translations
 import arTranslations from '../i18n/ar.json';
 import frTranslations from '../i18n/fr.json';
+import enTranslations from '../i18n/en.json';
 
 // Translation type
 type Translations = typeof arTranslations;
@@ -16,7 +17,8 @@ type Translations = typeof arTranslations;
 // Translations map
 const translations: Record<Language, Translations> = {
   ar: arTranslations,
-  fr: frTranslations
+  fr: frTranslations,
+  en: enTranslations
 };
 
 // Cookie key for language preference
@@ -38,7 +40,7 @@ interface LanguageProviderProps {
 const getNestedValue = (obj: Record<string, unknown>, path: string): string => {
   const keys = path.split('.');
   let current: unknown = obj;
-  
+
   for (const key of keys) {
     if (current && typeof current === 'object' && key in current) {
       current = (current as Record<string, unknown>)[key];
@@ -46,7 +48,7 @@ const getNestedValue = (obj: Record<string, unknown>, path: string): string => {
       return path; // Return path if key not found
     }
   }
-  
+
   return typeof current === 'string' ? current : path;
 };
 
@@ -65,7 +67,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   // Initialize language from cookie or default to French
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = Cookies.get(LANGUAGE_COOKIE_KEY);
-    return (saved === 'ar' || saved === 'fr') ? saved : 'fr';
+    return (saved === 'ar' || saved === 'fr' || saved === 'en') ? saved as Language : 'fr';
   });
 
   // Check if current language is RTL (Arabic)
@@ -75,7 +77,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
-    
+
     // Add RTL class for Tailwind if needed
     if (isRTL) {
       document.body.classList.add('rtl');
