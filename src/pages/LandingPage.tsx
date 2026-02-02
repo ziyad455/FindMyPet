@@ -8,10 +8,13 @@ import { useLanguage, useAuth } from '../context';
 
 export const LandingPage: React.FC = () => {
   const { t, isRTL } = useLanguage();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const heroRef = useRef<HTMLDivElement>(null);
   const featuresRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<HTMLDivElement>(null);
+
+  // Determine CTA destination - if still loading auth, default to login
+  const ctaPath = authLoading ? '/login' : (user ? '/submit' : '/register');
 
   useEffect(() => {
     // Hero animations
@@ -82,7 +85,7 @@ export const LandingPage: React.FC = () => {
             </p>
 
             <Link
-              to={user ? '/submit' : '/register'}
+              to={ctaPath}
               className="hero-cta inline-flex items-center gap-3 px-8 py-4 bg-white text-primary-600 font-semibold rounded-2xl shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-black/30 hover:-translate-y-1 transition-all duration-300 text-lg group"
             >
               {t('landing.ctaButton')}
@@ -198,7 +201,7 @@ export const LandingPage: React.FC = () => {
           {/* CTA */}
           <div className="text-center mt-16">
             <Link
-              to={user ? '/submit' : '/register'}
+              to={ctaPath}
               className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-2xl shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-1 transition-all duration-300 text-lg group"
             >
               {t('landing.ctaButton')}
