@@ -84,7 +84,7 @@ export const PetPage: React.FC = () => {
                 <img
                   src={pet.photoUrl}
                   alt={pet.petName}
-                  className="relative z-10 w-full h-full object-contain"
+                  className="relative w-full h-full object-contain"
                 />
               </div>
             ) : (

@@ -122,7 +122,7 @@ export const PetCard: React.FC<PetCardProps> = ({
             <img
               src={pet.photoUrl}
               alt={pet.petName}
-              className="relative z-10 w-full h-full object-contain transition-all duration-500"
+              className="relative w-full h-full object-contain transition-all duration-500"
               loading="lazy"
             />
           </div>
@@ -134,7 +134,7 @@ export const PetCard: React.FC<PetCardProps> = ({
 
         {/* Status Badge */}
         <div
-          className={`absolute top-3 ${isRTL ? 'left-3' : 'right-3'} px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 ${status.bg} ${status.text} border ${status.border} backdrop-blur-sm`}
+          className={`absolute top-3 ${isRTL ? 'left-3' : 'right-3'} z-20 px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 ${status.bg} ${status.text} border ${status.border} backdrop-blur-sm shadow-sm`}
         >
           {status.icon}
           {statusLabels[pet.status]}
