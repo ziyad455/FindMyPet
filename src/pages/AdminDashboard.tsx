@@ -70,8 +70,9 @@ export const AdminDashboard: React.FC = () => {
     try {
       switch (confirmState.action) {
         case 'approve': {
-          const qrUrl = `${window.location.origin}/pet/${confirmState.pet.id}`;
-          await approvePet(confirmState.pet.id, qrUrl);
+          // Only store the pet ID path, not the full URL (URL is constructed dynamically)
+          const qrPath = `/pet/${confirmState.pet.id}`;
+          await approvePet(confirmState.pet.id, qrPath);
           success(t('admin.approved'));
           break;
         }
