@@ -260,7 +260,7 @@ export const PetForm: React.FC<PetFormProps> = ({
                 <img
                   src={photoPreview}
                   alt="Preview"
-                  className="w-32 h-32 object-cover rounded-xl shadow-md"
+                  className="w-32 h-32 object-contain bg-white rounded-xl shadow-md border border-gray-100"
                 />
                 <button
                   type="button"

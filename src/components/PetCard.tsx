@@ -113,7 +113,7 @@ export const PetCard: React.FC<PetCardProps> = ({
           <img
             src={pet.photoUrl}
             alt={pet.petName}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            className="w-full h-full object-contain transition-all duration-500"
             loading="lazy"
           />
         ) : (
