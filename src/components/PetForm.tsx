@@ -256,11 +256,17 @@ export const PetForm: React.FC<PetFormProps> = ({
 
           {photoPreview ? (
             <div className="flex flex-col items-center gap-4">
-              <div className="relative">
+              <div className="relative w-32 h-32 overflow-hidden rounded-xl shadow-md border border-gray-100 bg-gray-900 flex items-center justify-center">
+                <img
+                  src={photoPreview}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover blur-lg opacity-40 scale-110"
+                  aria-hidden="true"
+                />
                 <img
                   src={photoPreview}
                   alt="Preview"
-                  className="w-32 h-32 object-contain bg-white rounded-xl shadow-md border border-gray-100"
+                  className="relative z-10 w-full h-full object-contain"
                 />
                 <button
                   type="button"
@@ -269,7 +275,7 @@ export const PetForm: React.FC<PetFormProps> = ({
                     setPhotoPreview(null);
                     setFormData(prev => ({ ...prev, photo: null }));
                   }}
-                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-md"
+                  className="absolute -top-1 -right-1 z-20 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors shadow-md"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

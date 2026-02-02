@@ -110,12 +110,22 @@ export const PetCard: React.FC<PetCardProps> = ({
       {/* Pet Image */}
       <div className="aspect-video relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-50">
         {pet.photoUrl ? (
-          <img
-            src={pet.photoUrl}
-            alt={pet.petName}
-            className="w-full h-full object-contain transition-all duration-500"
-            loading="lazy"
-          />
+          <div className="w-full h-full relative flex items-center justify-center bg-gray-900">
+            {/* Blurred shadow background */}
+            <img
+              src={pet.photoUrl}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover blur-xl opacity-40 scale-110"
+              aria-hidden="true"
+            />
+            {/* Main contained image */}
+            <img
+              src={pet.photoUrl}
+              alt={pet.petName}
+              className="relative z-10 w-full h-full object-contain transition-all duration-500"
+              loading="lazy"
+            />
+          </div>
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <span className="text-5xl opacity-50">🐾</span>

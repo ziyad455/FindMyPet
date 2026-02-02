@@ -74,11 +74,19 @@ export const PetPage: React.FC = () => {
           {/* Pet Photo */}
           <div className="aspect-video relative bg-gray-100">
             {pet.photoUrl ? (
-              <img
-                src={pet.photoUrl}
-                alt={pet.petName}
-                className="w-full h-full object-contain"
-              />
+              <div className="w-full h-full relative flex items-center justify-center bg-gray-900">
+                <img
+                  src={pet.photoUrl}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-50 scale-110"
+                  aria-hidden="true"
+                />
+                <img
+                  src={pet.photoUrl}
+                  alt={pet.petName}
+                  className="relative z-10 w-full h-full object-contain"
+                />
+              </div>
             ) : (
               <div className="w-full h-full flex items-center justify-center text-8xl">
                 🐾
