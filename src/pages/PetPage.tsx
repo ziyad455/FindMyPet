@@ -6,7 +6,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useLanguage, useAuth } from '../context';
 import { usePet } from '../hooks';
 import { LoadingSpinner } from '../components';
-import { formatMoroccanPhone } from '../utils/phoneFormatter';
+import { formatAnyPhone } from '../utils/phoneFormatter';
 
 export const PetPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -122,7 +122,7 @@ export const PetPage: React.FC = () => {
                     className="text-primary-600 hover:text-primary-700 font-medium"
                     dir="ltr"
                   >
-                    {formatMoroccanPhone(pet.phone)}
+                    {formatAnyPhone(pet.phone)}
                   </a>
                 </div>
               </div>

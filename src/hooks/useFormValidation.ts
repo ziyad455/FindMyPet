@@ -7,8 +7,7 @@ import { useLanguage } from './useLanguage';
 import { validateImageFile } from '../services/storageService';
 
 // Phone regex pattern (international format) - defined outside component
-// Moroccan phone regex pattern (+212 followed by 9 digits)
-const MOROCCAN_PHONE_REGEX = /^\+212\d{9}$/;
+
 
 export const useFormValidation = () => {
   const { t } = useLanguage();
@@ -39,13 +38,27 @@ export const useFormValidation = () => {
         break;
 
       case 'phone':
-        if (!value || (typeof value === 'string' && value.replace(/[-\s]/g, '') === '+212')) {
+        if (!value || (typeof value === 'string' && !value.trim())) {
           return t('form.validation.phoneRequired');
         }
         if (typeof value === 'string') {
           const cleanValue = value.replace(/[-\s]/g, '');
-          if (!MOROCCAN_PHONE_REGEX.test(cleanValue)) {
+
+          // Check if it starts with + (international format)
+          if (!cleanValue.startsWith('+')) {
             return t('form.validation.phoneInvalid');
+          }
+
+          // Morocco-specific validation
+          if (cleanValue.startsWith('+212')) {
+            if (!/^\+212\d{9}$/.test(cleanValue)) {
+              return t('form.validation.phoneInvalid');
+            }
+          } else {
+            // General validation for other countries: + followed by 7-15 digits
+            if (!/^\+\d{7,15}$/.test(cleanValue)) {
+              return t('form.validation.phoneInvalid');
+            }
           }
         }
         break;

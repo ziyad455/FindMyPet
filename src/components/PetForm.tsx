@@ -1,12 +1,13 @@
 // Pet Form component for creating and editing pets
 // Modern design with smooth animations and file upload
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import type { PetFormData, FormErrors, Pet } from '../types';
 import { useLanguage } from '../context';
 import { useFormValidation } from '../hooks';
 import LoadingSpinner from './LoadingSpinner';
-import { formatMoroccanPhone, cleanPhoneForStorage } from '../utils/phoneFormatter';
+import { formatPhone, cleanPhoneForStorage } from '../utils/phoneFormatter';
+import { countries } from '../constants/countries';
 
 interface PetFormProps {
   initialData?: Pet;
@@ -26,15 +27,36 @@ export const PetForm: React.FC<PetFormProps> = ({
   const [formData, setFormData] = useState<PetFormData>({
     ownerName: initialData?.ownerName || '',
     petName: initialData?.petName || '',
-    phone: initialData?.phone ? formatMoroccanPhone(initialData.phone) : '+212',
+    phone: initialData?.phone ? formatPhone(initialData.phone) : '+212',
     photo: null,
     message: initialData?.message || ''
+  });
+
+  const [selectedCountry, setSelectedCountry] = useState(() => {
+    if (initialData?.phone) {
+      const found = countries.find(c => initialData.phone.startsWith(c.code));
+      return found || countries[0];
+    }
+    return countries[0];
   });
 
   const [photoPreview, setPhotoPreview] = useState<string | null>(
     initialData?.photoUrl || null
   );
   const [isDragging, setIsDragging] = useState(false);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsCountryDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Handle text input changes
   const handleChange = (
@@ -46,22 +68,38 @@ export const PetForm: React.FC<PetFormProps> = ({
   };
 
   // Specialized handler for Moroccan phone number (+212)
+  // Specialized handler for country-specific phone number
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
 
-    // Ensure it always starts with +212
-    if (!value.startsWith('+212')) {
-      value = '+212';
+    // Ensure it always starts with the selected country code
+    if (!value.startsWith(selectedCountry.code)) {
+      value = selectedCountry.code;
     }
 
     // Extract digits and apply formatting
-    const prefix = '+212';
     const cleanValue = value.replace(/[-\s]/g, '');
-    const digits = cleanValue.slice(prefix.length).replace(/\D/g, '').slice(0, 9);
+    let digits = cleanValue.slice(selectedCountry.code.length).replace(/\D/g, '');
 
-    const formattedValue = formatMoroccanPhone(prefix + digits);
+    // Limits for Morocco
+    if (selectedCountry.code === '+212') {
+      digits = digits.slice(0, 9);
+    } else {
+      digits = digits.slice(0, 15);
+    }
+
+    const formattedValue = formatPhone(selectedCountry.code + digits, selectedCountry.code);
 
     setFormData(prev => ({ ...prev, phone: formattedValue }));
+    clearFieldError('phone');
+  };
+
+  const handleCountrySelect = (country: typeof countries[0]) => {
+    setSelectedCountry(country);
+    setIsCountryDropdownOpen(false);
+
+    // When country changes, reset phone to the new code
+    setFormData(prev => ({ ...prev, phone: country.code }));
     clearFieldError('phone');
   };
 
@@ -201,22 +239,63 @@ export const PetForm: React.FC<PetFormProps> = ({
         <label htmlFor="phone" className={labelClass}>
           {t('form.phone')} <span className="text-red-500">*</span>
         </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
+        <div className="flex gap-2">
+          {/* Custom Country Dropdown */}
+          <div className="relative flex-shrink-0" ref={dropdownRef}>
+            <button
+              type="button"
+              onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+              className="h-full px-3 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 hover:bg-white hover:border-primary-300 focus:outline-none focus:ring-4 focus:ring-primary-100 transition-all duration-200 flex items-center justify-between gap-1 text-xl min-w-[70px]"
+            >
+              <span>{selectedCountry.flag}</span>
+              <svg
+                className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${isCountryDropdownOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {isCountryDropdownOpen && (
+              <div className="absolute top-full left-0 mt-2 w-48 max-h-60 overflow-y-auto bg-white border border-gray-100 rounded-xl shadow-xl z-50 py-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                {countries.map((c) => (
+                  <button
+                    key={c.name}
+                    type="button"
+                    onClick={() => handleCountrySelect(c)}
+                    className={`w-full px-4 py-2.5 flex items-center gap-3 text-left hover:bg-primary-50 transition-colors ${selectedCountry.code === c.code ? 'bg-primary-50 text-primary-600 font-semibold' : 'text-gray-700'
+                      }`}
+                  >
+                    <span className="text-xl">{c.flag}</span>
+                    <div className="flex flex-col">
+                      <span className="text-sm">{c.name}</span>
+                      <span className="text-xs text-gray-400">{c.code}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handlePhoneChange}
-            placeholder="+212XXXXXXXXX"
-            className={`${inputBaseClass} pl-12 ${errors.phone ? 'border-red-400 focus:border-red-500 focus:ring-red-100' : 'border-gray-200'}`}
-            dir="ltr"
-          />
+
+          <div className="relative flex-grow">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handlePhoneChange}
+              placeholder={selectedCountry.placeholder || "+212XXXXXXXXX"}
+              className={`${inputBaseClass} pl-12 ${errors.phone ? 'border-red-400 focus:border-red-500 focus:ring-red-100' : 'border-gray-200'}`}
+              dir="ltr"
+            />
+          </div>
         </div>
         {errors.phone && (
           <p className="mt-2 text-sm text-red-600 flex items-center gap-1">
