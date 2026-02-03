@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useLanguage } from '../context';
+import { useLanguage, useAuth } from '../context';
 import { usePet } from '../hooks';
 import { LoadingSpinner } from '../components';
 import { formatMoroccanPhone } from '../utils/phoneFormatter';
@@ -11,6 +11,7 @@ import { formatMoroccanPhone } from '../utils/phoneFormatter';
 export const PetPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { t } = useLanguage();
+  const { isAdmin } = useAuth();
   const { pet, loading, error } = usePet(id);
 
   if (loading) {
@@ -44,8 +45,8 @@ export const PetPage: React.FC = () => {
     );
   }
 
-  // Only show approved pets publicly
-  if (pet.status !== 'approved') {
+  // Only show approved pets publicly (admins can see any pet)
+  if (pet.status !== 'approved' && !isAdmin) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12">
         <div className="max-w-md mx-auto px-4 text-center">
