@@ -16,6 +16,11 @@ import 'swiper/css/autoplay';
 // Import required modules
 import { Autoplay, Pagination } from 'swiper/modules';
 
+// Import images
+import image1 from '../assets/image_1.png';
+import image2 from '../assets/image_2.png';
+import finaleResulte from '../assets/finale_resulte.png';
+
 export const LandingPage: React.FC = () => {
   const { t, isRTL } = useLanguage();
   const { user, loading: authLoading } = useAuth();
@@ -147,7 +152,7 @@ export const LandingPage: React.FC = () => {
             {/* Slide 1 - image_1.png */}
             <SwiperSlide>
               <div className="relative h-full w-full overflow-hidden">
-                <img src="/src/assets/image_1.png" alt="Step 1" className="w-full h-full object-cover" />
+                <img src={image1} alt="Step 1" className="w-full h-full object-cover" />
                 <div className="absolute inset-x-0 bottom-0 p-6 md:p-12 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end">
                   <span className="inline-block px-4 py-1.5 rounded-full bg-primary-500 text-white text-sm font-bold mb-4 w-fit">Step 1</span>
                   <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 leading-tight uppercase tracking-tight">{t('landing.howItWorks.step1.title')}</h3>
@@ -158,7 +163,7 @@ export const LandingPage: React.FC = () => {
             {/* Slide 2 - image_2.png */}
             <SwiperSlide>
               <div className="relative h-full w-full overflow-hidden">
-                <img src="/src/assets/image_2.png" alt="Step 2" className="w-full h-full object-cover" />
+                <img src={image2} alt="Step 2" className="w-full h-full object-cover" />
                 <div className="absolute inset-x-0 bottom-0 p-6 md:p-12 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end">
                   <span className="inline-block px-4 py-1.5 rounded-full bg-primary-500 text-white text-sm font-bold mb-4 w-fit">Step 2</span>
                   <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 leading-tight uppercase tracking-tight">{t('landing.howItWorks.step2.title')}</h3>
@@ -169,7 +174,7 @@ export const LandingPage: React.FC = () => {
             {/* Slide 3 - finale_resulte.png */}
             <SwiperSlide>
               <div className="relative h-full w-full overflow-hidden">
-                <img src="/src/assets/finale_resulte.png" alt="Final Result" className="w-full h-full object-cover" />
+                <img src={finaleResulte} alt="Final Result" className="w-full h-full object-cover" />
                 <div className="absolute inset-x-0 bottom-0 p-6 md:p-12 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end">
                   <span className="inline-block px-4 py-1.5 rounded-full bg-primary-500 text-white text-sm font-bold mb-4 w-fit">Final Result</span>
                   <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 leading-tight uppercase tracking-tight">{t('landing.howItWorks.step4.title')}</h3>
