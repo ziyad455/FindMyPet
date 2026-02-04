@@ -37,7 +37,9 @@ export const Footer: React.FC = () => {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/findmypete?igsh=b2NrZXFwZmR3and4"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 bg-gray-800 hover:bg-primary-600 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-105"
                 aria-label="Instagram"
               >
@@ -100,7 +102,7 @@ export const Footer: React.FC = () => {
             </h3>
             <div className="space-y-3">
               <a
-                href="mailto:support@findmypet.com"
+                href="mailto:supp0rtfindmypet@gmail.com"
                 className="text-gray-400 hover:text-primary-400 text-sm transition-colors flex items-center gap-3"
               >
                 <div className="w-8 h-8 bg-gray-800 rounded-lg flex items-center justify-center">
@@ -108,7 +110,7 @@ export const Footer: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                support@findmypet.com
+                <span>supp0rtfindmypet@gmail.com</span>
               </a>
             </div>
           </div>
