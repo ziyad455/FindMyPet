@@ -46,11 +46,11 @@
     "howItWorks": {
       "title": "Comment ça marche ?",
       "step1": {
-        "title": "Créez un compte",
+        "title": "Nous créons le code QR",
         "description": "Inscrivez-vous avec votre email"
       },
       "step2": {
-        "title": "Ajoutez votre animal",
+        "title": "Nous fabriquons le collier",
         "description": "Entrez le nom, la photo et vos coordonnées"
       },
       "step3": {
@@ -61,6 +61,10 @@
         "title": "Protégez votre animal",
         "description": "Mettez le collier et soyez contacté si votre animal est trouvé"
       }
+    },
+    "visualJourney": {
+      "title": "Le Parcours en Images",
+      "description": "Découvrez comment le collier de votre animal prend vie, de l'inscription au produit final."
     }
   },
   "form": {

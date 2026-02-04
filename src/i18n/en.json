@@ -46,11 +46,11 @@
         "howItWorks": {
             "title": "How it works?",
             "step1": {
-                "title": "Create an account",
+                "title": "We create the QR code",
                 "description": "Sign up with your email"
             },
             "step2": {
-                "title": "Add your pet",
+                "title": "We make the collar",
                 "description": "Enter name, photo and contact details"
             },
             "step3": {
@@ -61,6 +61,10 @@
                 "title": "Protect your pet",
                 "description": "Put on the collar and be contacted if your pet is found"
             }
+        },
+        "visualJourney": {
+            "title": "Visual Journey",
+            "description": "See how your pet's collar comes to life, from registration to the final product."
         }
     },
     "form": {
