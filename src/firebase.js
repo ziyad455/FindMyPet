@@ -6,13 +6,13 @@ import { getAnalytics } from "firebase/analytics"; // Optional, for analytics
 
 // Firebase config from .env
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+  apiKey: "AIzaSyDd8Xkd8QPHGmtSv2HC9NQMM_Qq33pzVCQ",
+  authDomain: "findmypet-ab71b.firebaseapp.com",
+  projectId: "findmypet-ab71b",
+  storageBucket: "findmypet-ab71b.firebasestorage.app",
+  messagingSenderId: "670805876606",
+  appId: "1:670805876606:web:dd4e6403bb41e53b279d2f",
+  measurementId: "G-HV9FJ2ZL1E",
 };
 
 // Initialize Firebase
