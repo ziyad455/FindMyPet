@@ -9,3 +9,4 @@ export { ProtectedRoute } from './ProtectedRoute';
 export { Modal, type ModalVariant } from './Modal';
 export { Toast, ToastContainer } from './Toast';
 export { ConfirmDialog } from './ConfirmDialog';
+export { default as WhatsAppButton } from './WhatsAppButton';

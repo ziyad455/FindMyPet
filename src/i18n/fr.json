@@ -194,6 +194,8 @@
     "copyright": "© {{year}} FindMyPet. Tous droits réservés.",
     "privacy": "Politique de confidentialité",
     "terms": "Conditions d'utilisation",
-    "contact": "Contactez-nous"
+    "contact": "Contactez-nous",
+    "whatsapp": "WhatsApp",
+    "contactWhatsApp": "Contactez-nous sur WhatsApp"
   }
 }
