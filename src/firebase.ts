@@ -7,13 +7,13 @@ import { getFirestore } from 'firebase/firestore';
 
 // Firebase configuration from environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyAqjdRanYWwTZYxNkw1KTncWuYCrvsguM8",
-  authDomain: "findmypet-e47cf.firebaseapp.com",
-  projectId: "findmypet-e47cf",
-  storageBucket: "findmypet-e47cf.firebasestorage.app",
-  messagingSenderId: "963136921263",
-  appId: "1:963136921263:web:ae18a761cb50a90143be5a",
-  measurementId: "G-3M1YLENFCD"
+  apiKey: "AIzaSyDd8Xkd8QPHGmtSv2HC9NQMM_Qq33pzVCQ",
+  authDomain: "findmypet-ab71b.firebaseapp.com",
+  projectId: "findmypet-ab71b",
+  storageBucket: "findmypet-ab71b.firebasestorage.app",
+  messagingSenderId: "670805876606",
+  appId: "1:670805876606:web:dd4e6403bb41e53b279d2f",
+  measurementId: "G-HV9FJ2ZL1E"
 };
 
 
